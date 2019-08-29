@@ -15,14 +15,17 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    public static final int START_CODE = 101;
     private TextView textView;
     private boolean isBound = false;
+    private MyBindService myBindService;
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            iBinder = 
+
+            MyBindService.LocalBinder localBinder = (MyBindService.LocalBinder) iBinder;
+            myBindService = localBinder.getService();
+            isBound = true;
+
         }
 
         @Override
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getNumber(View view){
-
+        if(isBound) {
+            textView.setText(String.valueOf(myBindService.getNumber()));
+        }
     }
 }

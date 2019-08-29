@@ -21,7 +21,6 @@ public class MyBindService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-
         return iBinder;
     }
 
@@ -30,7 +29,7 @@ public class MyBindService extends Service {
         return START_STICKY;
     }
 
-    public class LocalBinder extends Binder{
+    class LocalBinder extends Binder{
         MyBindService getService(){
             return MyBindService.this;
         }
